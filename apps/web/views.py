@@ -5,8 +5,10 @@ from libs import ajax
 from django.http import HttpResponse
 from .models import Document
 from . import models
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def index(request):
     """分片上传"""
 
@@ -33,7 +35,7 @@ def index(request):
     documents = Document.objects.all()
     return ajax.ajax_template(request, 'web_upload/web_upload.html', {'documents': documents})
 
-
+@csrf_exempt
 def upload_success(request):
     """所有分片上传成功"""
 
@@ -83,7 +85,7 @@ def upload_success(request):
 
     return ajax.ajax_data(name)
 
-
+@csrf_exempt
 def list_exist(request):
     """判断该文件上传了多少个分片"""
     name = request.POST.get('filename')
@@ -107,7 +109,7 @@ def list_exist(request):
     data['list'] = list
     # print('判断该文件上传了多少个分片',data)
     return ajax.ajax_data(data)
-
+@csrf_exempt
 #移动文件到新文件路径
 def mymovefile(srcfile, dstfile):
     if not os.path.isfile(srcfile):
@@ -119,6 +121,7 @@ def mymovefile(srcfile, dstfile):
         shutil.move(srcfile, dstfile)  # 移动文件
         print("move %s -> %s" % (srcfile, dstfile))
 
+@csrf_exempt
 #复制文件到新文件路径
 def mycopyfile(srcfile, dstfile):
     if not os.path.isfile(srcfile):
