@@ -9,7 +9,6 @@ The front-end webupload uploader + Django backstage implementation of large file
 
 没写modle ORM 上传文件 路径的映射 欢迎完善 
 
-文件上传涉及的 csrf_token防护 根本问题未解决   暂时的方案时关闭了涉及到 上传的View 函数的 csrf_token防护
 
 redis 缓存上传碎片的方式注释了  想尝试这个可以自己打开去配置
 
